@@ -1,0 +1,25 @@
+flutter build web --release --web-renderer html
+
+flutter run --web-renderer html
+
+//pegar a quantidade outra tabela
+SELECT a.nome, a.quantidade,
+       COALESCE(SUM(b.quantidade), 0) AS media
+  FROM produto a
+  LEFT JOIN itens b ON b.produto= a.id
+  WHERE a.ano = 2021
+ GROUP BY a.id;
+
+ //nas configuarçoes
+ --web-renderer html
+
+ //100003628923500
+ //47999435297
+
+ //copiar de tabela pra outra
+ UPDATE estoque
+     SET nomeproduto = (
+         SELECT nome
+         FROM produto
+         WHERE estoque.produto = produto.id
+     );
