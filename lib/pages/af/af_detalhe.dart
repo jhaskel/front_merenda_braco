@@ -145,7 +145,7 @@ class _AfDetalheState extends State<AfDetalhe> {
         ise = true;
       }
 
-      if(ordem.status ==Status.ordemAutorizada){
+      if(ordem.status ==Status.ordemAutorizada || ordem.status ==Status.ordemEmpenhada || ordem.status == Status.ordemFornecedor){
         print("AKIAUTORIZADA");
         setState(() {
           isdespesa = true;
@@ -915,7 +915,7 @@ print('isdespesa ${isdespesa}');
     // configura o  AlertDialog
 
     AlertDialog alerta = AlertDialog(
-      title: Text("Selcione uma data"),
+      title: Text("Selecione uma data"),
       content: Container(
         width: 380,
         child: Padding(

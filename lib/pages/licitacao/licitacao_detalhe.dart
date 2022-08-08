@@ -25,6 +25,7 @@ import 'package:merenda_escolar/utils/nav.dart';
 import 'package:merenda_escolar/utils/pdf/licitacao_pdf_estoque.dart';
 import 'package:merenda_escolar/web/breadcrumb.dart';
 import 'package:provider/provider.dart';
+import 'package:search_page/search_page.dart';
 
 class LicitacaoDetalhe extends StatefulWidget {
   final Licitacao licitacao;
@@ -327,6 +328,7 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
       } else if (bloc.lista.length == 0 && !_isLoading) {
         return Column(
           children: [
+
             Container(
               height: 50,
               child: FloatingActionButton(
@@ -336,6 +338,26 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
                 child: Icon(Icons.add),
               ),
 
+            ),
+            Container(
+              height: 40,
+
+              child:  TextFormField(
+                enabled: false,
+                decoration: new InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  labelText: "Buscar...",
+                  fillColor: Colors.white,
+                  border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                    borderSide: new BorderSide(),
+                  ),
+                  //fillColor: Colors.green
+                ),
+
+                keyboardType: TextInputType.emailAddress,
+
+              ),
             ),
             Center(
               child: Text('Sem registros!'),
@@ -345,6 +367,9 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
         );
       } else
         lista = bloc.lista;
+
+      lista.sort((a, b) => b.isativo.toString().compareTo(a.isativo.toString()));
+
       return Container(
         height: 500,
         width: MediaQuery.of(context).size.width,
@@ -353,17 +378,56 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
           children: [
             Container(
               height: 50,
-              child: FloatingActionButton(
-                onPressed: () {
-                  _onClickProdutoAdd();
-                },
-                child: Icon(Icons.add),
+              child: Row(
+                children: [
+                  Container(
+                    width: 100,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        _onClickProdutoAdd();
+                      },
+                      child: Icon(Icons.add),
+                    ),
+                  ),
+                  Container(
+                    width: 200,
+                    child:   InkWell(
+                      onTap: (){
+                        buildShowSearch(context, lista);
+                      },
+                      child: Container(
+                        height: 40,
+                        child:  TextFormField(
+                          enabled: false,
+                          decoration: new InputDecoration(
+                            prefixIcon: Icon(Icons.search),
+                            labelText: "Buscar...",
+                            fillColor: Colors.white,
+                            border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(25.0),
+                              borderSide: new BorderSide(),
+                            ),
+                            //fillColor: Colors.green
+                          ),
+
+                          keyboardType: TextInputType.emailAddress,
+
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+                ],
               ),
             ),
+
+
             Expanded(
               child: ListView.builder(
                 itemCount: lista.length,
                 itemBuilder: (context, index) {
+
                   Estoque c = lista[index];
 
                   return _cardProduto(c);
@@ -508,6 +572,7 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
     }else{
       estoque  = ( c.quantidade - 0);
     }
+
     return ListTile(
       onTap: () {
         _onClickProduto(c);
@@ -515,7 +580,9 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(c.alias),
+          c.isativo
+              ? Text(c.alias)
+              :Text(c.alias,style: (TextStyle(color: Colors.red.shade400)),),
           Text(c.nomelicitacao)
 
         ],
@@ -849,5 +916,47 @@ class _LicitacaoDetalheState extends State<LicitacaoDetalhe> {
   _onClickEstoquePdf(List<Estoque> lista) {
     PagesModel.get(context)
         .push(PageInfo("Imprimir", LicitacaoPdfEstoque(lista,widget.licitacao)));
+  }
+
+  Future<Estoque> buildShowSearch(  BuildContext context, List<Estoque> peds) {
+    return showSearch(
+      context: context,
+      delegate: SearchPage<Estoque>(
+        onQueryUpdate: (s) => print(s),
+        items: peds,
+        searchLabel: 'Buscar',
+        suggestion: Center(
+          child: Text(
+              'Digite nome do produto ou seu código'),
+        ),
+        failure: Center(
+          child: Text('Nenhum dado encontrado :('),
+        ),
+        filter: (person) => [
+          person.nomeproduto,
+          person.alias,
+          person.code.toString(),
+          person.fornecedor.toString(),
+        ],
+        builder: (person) => ListTile(
+          title: Text(person.nomeproduto),
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(person.code.toString()),
+              Text(person.alias)
+            ],
+
+          ),
+
+          onTap: () {
+            _onClickProdutoEdit(person);
+
+            Navigator.pop(context);
+
+          },
+        ),
+      ),
+    );
   }
 }

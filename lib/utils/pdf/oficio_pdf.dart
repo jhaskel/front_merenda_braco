@@ -44,6 +44,7 @@ class _OficioPdfState extends State<OficioPdf> {
 
   @override
   void initState() {
+    print("KKKKKKKKKKKK");
     print(' ${widget.processo} - ${widget.af} - ${widget.conta} - ${widget.data}  - ${widget.total.toString()}, ${widget.despesa}');
     _gerar();
     super.initState();

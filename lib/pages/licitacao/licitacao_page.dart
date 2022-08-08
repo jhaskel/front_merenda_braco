@@ -64,6 +64,8 @@ class _LicitacaoPageState extends State<LicitacaoPage> {
     }else
       lista = bloc.lista;
 
+   lista.sort((a, b) => b.isativo.toString().compareTo(a.isativo.toString()));
+
    return  Scaffold(
      body: BreadCrumb(
        child:LicitacaoListView(lista),

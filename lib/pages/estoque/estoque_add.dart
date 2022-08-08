@@ -102,8 +102,7 @@ class _EstoqueAddState extends State<EstoqueAdd> {
         nomeProduto2 = uni.first.nome;
       });
 
-      print("kkl9 $unidade");
-      print("kkl9 $nomeProduto2");
+
 
   }
 
@@ -130,11 +129,15 @@ class _EstoqueAddState extends State<EstoqueAdd> {
     }
 
   }
-
+  var codeProduto;
+  var nomProduto;
 
   @override
   void initState() {
     if (estoque != null) {
+      codeProduto = estoque.produto;
+      nomProduto = estoque.nomeproduto;
+
        tCode.text = estoque.code.toString();
        tCategoria.text = estoque.categoria.toString();
        tFornecedor.text = estoque.fornecedor.toString();
@@ -200,8 +203,9 @@ class _EstoqueAddState extends State<EstoqueAdd> {
     if(estoque !=null){
       estoqueAd = EstoqueAd(
         id: estoque.id,
-        produto: estoque.produto,
+        produto: codeProduto,
         setor: estoque.setor,
+        nomeproduto: nomProduto,
         code: estoque.code,
         alias: estoque.alias,
         quantidade: estoque.quantidade,
@@ -453,7 +457,7 @@ class _EstoqueAddState extends State<EstoqueAdd> {
 
 
   _onClickSalvar() async {
-
+print("Haskel01");
     if (!_formKey.currentState.validate()) {
       return;
     } else {
@@ -485,16 +489,17 @@ class _EstoqueAddState extends State<EstoqueAdd> {
         valor = double.parse(valor1);
         print("004 $valor");
       } else {
-        print("1111 $valor");
+
         valor = double.parse(valor1);
+        print("1111 $valor");
       }
       // Cria o usuario
     var produ = estoqueAd ?? EstoqueAd();
-        produ.produto= idProduto;
+        produ.produto= codeProduto;
         produ.setor =1;
         produ.code = int.parse(tCode.text);
         produ.alias = estoque==null?nomeProduto:estoqueAd.alias;
-        produ.nomeproduto = nomeProduto2;
+        produ.nomeproduto = nomProduto;
         produ.quantidade = quantidade;
         produ.unidade = estoque ==null ?unidade:estoqueAd.unidade;
         produ.categoria = idCategoria;
@@ -508,6 +513,8 @@ class _EstoqueAddState extends State<EstoqueAdd> {
         produ.createdAt = hoje;
         produ.modifiedAt = hoje;
 
+        print("produdto enviado $produ");
+
       ApiResponse<bool> response = await EstoqueAddApi.save(context, produ);
 
       if (response.ok) {
@@ -517,9 +524,9 @@ class _EstoqueAddState extends State<EstoqueAdd> {
         bloc.fetchLicitacao(context, widget.licitacao.id);
         print("SUCESSO");
 
-      /*  alert(context, "Estoque salvo com sucesso", callback: () {_onClickRetorna();
+        alert(context, "Estoque salvo com sucesso", callback: () {_onClickRetorna();
 
-        });*/
+        });
       } else {
         alert(context, response.msg);
       }

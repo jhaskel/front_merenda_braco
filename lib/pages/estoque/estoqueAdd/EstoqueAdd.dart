@@ -122,6 +122,9 @@ class EstoqueAd {
 
   @override
   String toString() {
-    return 'Usuariok{id: $id,nome: $alias, quantidade: $quantidade, unidade: $unidade}';
+    return 'Usuariok{id: $id,produto: $produto, setor: $setor, code: $code, alias: $alias, nomeproduto: $nomeproduto, '
+        'quantidade: $quantidade, unidade: $unidade, categoria: $categoria, licitacao: $licitacao, processo: $processo'
+        ',fornecedor: $fornecedor,processo: $processo, agrofamiliar: $agrofamiliar,valor: $valor,ano: $ano,createdAt: $createdAt,'
+        'isativo: $isativo,modifiedAt: $modifiedAt}';
   }
 }

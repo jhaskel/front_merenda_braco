@@ -9,11 +9,7 @@ import 'package:merenda_escolar/pages/licitacao/Licitacao.dart';
 import 'package:merenda_escolar/pages/licitacao/licitacao_add.dart';
 import 'package:merenda_escolar/pages/licitacao/licitacao_api.dart';
 import 'package:merenda_escolar/pages/licitacao/licitacao_detalhe.dart';
-
-
-
 import 'package:merenda_escolar/utils/nav.dart';
-import 'package:merenda_escolar/utils/utils.dart';
 
 class LicitacaoListView extends StatefulWidget {
   final List<Licitacao> licitacao;

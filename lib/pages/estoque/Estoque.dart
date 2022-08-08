@@ -133,6 +133,6 @@ class Estoque {
 
   @override
   String toString() {
-    return 'Usuariok{id: $id,nome: $alias, valor: $valor, quantidade:$quantidade, unidade: $unidade,comprado:$comprado,agrofamiliar:$agrofamiliar,ativo:$isativo}';
+    return 'Usuariok{id: $id,nome: $alias, valor: $valor, quantidade:$quantidade, unidade: $unidade,comprado:$comprado,agrofamiliar:$agrofamiliar,isativo:$isativo}';
   }
 }
