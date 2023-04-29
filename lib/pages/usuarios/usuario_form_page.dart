@@ -378,13 +378,13 @@ class _UsuarioFormPageState extends State<UsuarioFormPage> {
 
   void _unidadeEscolar(BuildContext context, List<UnidadeEscolar> listEscolas) {
     // configura os botões
-    Widget lembrarButton = FlatButton(
+    Widget lembrarButton = MaterialButton(
       child: Text("ok"),
       onPressed: () {
         pop(context);
       },
     );
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed: () {
         pop(context);
@@ -398,7 +398,7 @@ class _UsuarioFormPageState extends State<UsuarioFormPage> {
         width: 600,
         child: Column(
           children: [
-            RaisedButton(
+            MaterialButton(
               child: Icon(Icons.search),
               onPressed: () => buildShowSearch(context, listEscolas),
             ),

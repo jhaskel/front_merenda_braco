@@ -201,7 +201,7 @@ class _CardapioAddState extends State<CardapioAdd> {
                 padding: const EdgeInsets.all(10),
                 child: DropdownSearch<String>(
                     mode: Mode.MENU,
-                    showSelectedItem: true,
+                    //showSelectedItem: true,
                     items: mapEscola.keys.toList(),
                     label: "Escola",
                     onChanged: (String data) {

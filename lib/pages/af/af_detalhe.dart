@@ -36,7 +36,7 @@ import 'package:merenda_escolar/utils/pdf/af_pdf_escola.dart';
 import 'package:merenda_escolar/utils/pdf/oficio_pdf.dart';
 import 'package:merenda_escolar/utils/utils.dart';
 import 'package:merenda_escolar/web/breadcrumb.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:intl/intl.dart';
@@ -145,7 +145,7 @@ class _AfDetalheState extends State<AfDetalhe> {
         ise = true;
       }
 
-      if(ordem.status ==Status.ordemAutorizada || ordem.status ==Status.ordemEmpenhada || ordem.status == Status.ordemFornecedor){
+      if(ordem.status ==Status.ordemAutorizada){
         print("AKIAUTORIZADA");
         setState(() {
           isdespesa = true;
@@ -899,14 +899,14 @@ print('isdespesa ${isdespesa}');
       String numeroProcesso, Contabilidade conta) {
     bool progress = false;
     // configura o button
-    Widget okButton = FlatButton(
+    Widget okButton = MaterialButton(
       child: Text("OK"),
       onPressed: () {
         _onClickAdd3( numeroProcesso, datax);
       },
     );
 
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed: () {
         pop(context);
@@ -915,7 +915,7 @@ print('isdespesa ${isdespesa}');
     // configura o  AlertDialog
 
     AlertDialog alerta = AlertDialog(
-      title: Text("Selecione uma data"),
+      title: Text("Selcione uma data"),
       content: Container(
         width: 380,
         child: Padding(

@@ -45,7 +45,7 @@ class _AppButtonProgressState extends State<AppButtonProgress> with TickerProvid
               key: _globalKey,
               height: 48,
               width: _width,
-              child: RaisedButton(
+              child: MaterialButton(
                 animationDuration: Duration(milliseconds: 1000),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),

@@ -85,22 +85,22 @@ class PdffPageState extends State<PdffPage> with SingleTickerProviderStateMixin 
     final scaffold = Scaffold.of(context);
 
     // ignore: deprecated_member_use
-    scaffold.showSnackBar(
+ /*   scaffold.showSnackBar(
       const SnackBar(
         content: Text('Document printed successfully'),
       ),
-    );
+    );*/
   }
 
   void _showSharedToast(BuildContext context) {
     final scaffold = Scaffold.of(context);
 
     // ignore: deprecated_member_use
-    scaffold.showSnackBar(
+  /*  scaffold.showSnackBar(
       const SnackBar(
         content: Text('Document shared successfully'),
       ),
-    );
+    );*/
   }
 
   Future<void> _saveAsFile(

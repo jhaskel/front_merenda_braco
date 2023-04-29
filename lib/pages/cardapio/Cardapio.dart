@@ -46,13 +46,12 @@ class Cardapio {
       id: map['id'],
       escola: map['escola'],
       nomedaescola: map['nomedaescola'],
-
       title: map['title'],
       imagem: map['imagem'],
       isativo: map['isativo'],
       createdAt: map['createdAt'],
       modifiedAt: map['modifiedAt'],
-       nomedaesc: map['nomedaesc'],
+      nomedaesc: map['nomedaesc'],
 
     );
   }

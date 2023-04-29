@@ -1,6 +1,7 @@
 //Package imports
 import 'package:flutter/material.dart';
 import 'package:merenda_escolar/app_model.dart';
+import 'package:merenda_escolar/constants.dart';
 import 'package:merenda_escolar/core/bloc/config_bloc.dart';
 import 'package:merenda_escolar/pages/af/Af.dart';
 import 'package:merenda_escolar/pages/pro.dart';
@@ -35,7 +36,7 @@ class _AfPdfState extends State<AfPdf> {
 
   _gerar()async{
     final bloc = Provider.of<ConfigBloc>(context,listen: false);
-     var nomeSecretaria = bloc.lista.first.nomeContato;
+     var nomeSecretaria = RESPONSAVEL;
      var cargo = bloc.lista.first.cargo;
     await _generatePDF(nomeSecretaria,cargo);
     PagesModel.get(context).pop();

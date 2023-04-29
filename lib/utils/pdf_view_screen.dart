@@ -42,7 +42,7 @@ class _HeaderAndFooterPdfState extends State<HeaderAndFooterPdf> {
               const SizedBox(height: 20, width: 30),
               Align(
                   alignment: Alignment.center,
-                  child: FlatButton(
+                  child: MaterialButton(
                       child: const Text('Generate PDF',
                           style: TextStyle(color: Colors.black)),
                       color: Colors.lightGreenAccent,

@@ -559,7 +559,7 @@ class _PedidoDetalheState extends State<PedidoDetalhe> {
     var codex = DateFormat("yyMMdd").format(DateTime.now());
     var lista = listFornecedores.toList();
     var niveis = listItens.map((e) => e.nivel);
-    var nivel = niveis.toSet().toList();
+    var nivel = [1];
     print("LIST NIVEl $nivel");
     setState(() {
       _showProgress = true;
@@ -569,6 +569,9 @@ class _PedidoDetalheState extends State<PedidoDetalhe> {
     print(lista);
     idNivel = listItens.first.nivel;
 
+  //  nivel.clear();
+  //  nivel.add(0);
+
     for (var ni in nivel) {
       print("NIVel $ni");
       for (var forn in lista) {
@@ -577,6 +580,7 @@ class _PedidoDetalheState extends State<PedidoDetalhe> {
             .where((w) => w.nivel == ni);
         var tot1 = tot.map((e) => e.total);
         var total = tot1.reduce((a, b) => a + b);
+
         var code = ('$codex$ni$forn');
 
         toast(context, 'Gerando Af ${code}...Aguarde!', duration: 5);
@@ -588,8 +592,8 @@ class _PedidoDetalheState extends State<PedidoDetalhe> {
         afp.fornecedor = forn;
         afp.nivel = ni;
         afp.setor = widget.user.setor;
-
         AfPedidoApi.save(context, afp);
+
         var afs = af ?? AfAdd();
         afs.code = int.parse(code);
         afs.createdAt = DateTime.now().toIso8601String();
@@ -638,7 +642,95 @@ class _PedidoDetalheState extends State<PedidoDetalhe> {
     PagesModel nav = PagesModel.get(context);
     nav.push(PageInfo("pedidos", PedidoPage()), replace: true);
   }
+  Future<void> _geraAf2() async {
+    final blocPedido = Provider.of<PedidoBloc>(context, listen: false);
+    var afbloc = Provider.of<AfBloc>(context, listen: false);
 
+    //antigo
+    AfAdd af;
+    AfPedido afpedido;
+    var codex = DateFormat("yyMMdd").format(DateTime.now());
+    var lista = listFornecedores.toList();
+    var niveis = listItens.map((e) => e.nivel);
+    var nivel = niveis.toSet().toList();
+    print("LIST NIVEl $nivel");
+    setState(() {
+      _showProgress = true;
+      step = lista.length;
+    });
+
+    print(lista);
+    idNivel = listItens.first.nivel;
+
+    for (var ni in nivel) {
+      print("NIVel $ni");
+      for (var forn in lista) {
+        var tot = listItens
+            .where((e) => e.fornecedor == forn)
+            .where((w) => w.nivel == ni);
+        var tot1 = tot.map((e) => e.total);
+        var total = tot1.reduce((a, b) => a + b);
+        var code = ('$codex$ni$forn');
+
+        toast(context, 'Gerando Af ${code}...Aguarde!', duration: 5);
+
+        var afp = afpedido ?? AfPedido();
+        afp.af = int.parse(code);
+        afp.pedido = widget.pedido.id;
+        afp.total = total;
+        afp.fornecedor = forn;
+        afp.nivel = ni;
+        afp.setor = widget.user.setor;
+        AfPedidoApi.save(context, afp);
+
+        var afs = af ?? AfAdd();
+        afs.code = int.parse(code);
+        afs.createdAt = DateTime.now().toIso8601String();
+        afs.fornecedor = forn;
+        afs.isenviado = false;
+        afs.status = Status.ordemProcessada;
+        afs.isativo = true;
+        afs.nivel = ni;
+        afs.setor = widget.user.setor;
+        afs.isdespesa = false;
+
+        ApiResponse<bool> response =  await AfAddApi.save(context, afs);
+        if (response.ok) {
+          afbloc.addItensNovos(1);
+        }
+        setState(() {
+          currentStep++;
+        });
+
+        Compras itek;
+        for (var ite in listItens) {
+          itek = ite;
+          if (ite.fornecedor == forn) {
+            var itee = itek ?? Compras();
+            itee.id = itek.id;
+            itee.af = int.parse(code);
+            print(itee);
+            ComprasApi.save(context, itee);
+          }
+        }
+
+        print('${codex}${forn} - ${total}');
+      }
+    }
+    blocPedido.decQuant(1);
+
+    print("KLKKLKLKLKL");
+    var afs = pedidoAdd ?? PedidoAdd();
+    afs.status = Status.pedidoProcessado;
+    afs.isaf = true;
+    afs.ischeck = true;
+    await PedidoAddApi.save(context, afs);
+    setState(() {
+      _showProgress = false;
+    });
+    PagesModel nav = PagesModel.get(context);
+    nav.push(PageInfo("pedidos", PedidoPage()), replace: true);
+  }
   showExcluir(
       BuildContext context,
       Compras dados,

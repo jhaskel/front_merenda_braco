@@ -1,45 +1,8 @@
-import 'dart:html';
-import 'package:appbar_textfield/appbar_textfield.dart';
-import 'package:badges/badges.dart';
-import 'package:bloc_pattern/bloc_pattern.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:merenda_escolar/app_model.dart';
-import 'package:merenda_escolar/constants.dart';
-import 'package:merenda_escolar/pages/cart/Cart.dart';
-import 'package:merenda_escolar/pages/cart/cartPage.dart';
-import 'package:merenda_escolar/pages/categorias/Categoria.dart';
-import 'package:merenda_escolar/pages/categorias/Categoria_bloc.dart';
-import 'package:merenda_escolar/pages/compras/Compras.dart';
-import 'package:merenda_escolar/pages/login/usuario.dart';
-import 'package:merenda_escolar/pages/nivel/Nivel.dart';
-import 'package:merenda_escolar/pages/nivel/Nivel_bloc.dart';
 
-import 'package:merenda_escolar/pages/pedido/Pedido.dart';
-import 'package:merenda_escolar/pages/pedido/pedido_api.dart';
-import 'package:merenda_escolar/pages/pedido/pedido_bloc.dart';
-import 'package:merenda_escolar/pages/pedidoItens/PedidoItens.dart';
-
-import 'package:merenda_escolar/pages/compras/compras_api.dart';
-import 'package:merenda_escolar/pages/pedidoItens/PedidoItens_bloc.dart';
 import 'package:merenda_escolar/pages/produtos/Produto.dart';
-import 'package:merenda_escolar/pages/produtos/Produto_bloc.dart';
-import 'package:merenda_escolar/pages/unidadeEscolar/UnidadeEscolar.dart';
-import 'package:merenda_escolar/pages/unidadeEscolar/UnidadeEscolar_bloc.dart';
-import 'package:merenda_escolar/pages/widgets/app_text_field.dart';
-import 'package:merenda_escolar/pages/widgets/text.dart';
-import 'package:merenda_escolar/pages/widgets/text_error.dart';
-import 'package:merenda_escolar/utils/alert.dart';
-import 'package:merenda_escolar/utils/api_response.dart';
-import 'package:merenda_escolar/utils/bloc/bloc.dart';
-import 'package:merenda_escolar/utils/nav.dart';
-import 'package:merenda_escolar/utils/utils.dart';
-import 'package:merenda_escolar/web/utils/web_utils.dart';
-import 'package:intl/intl.dart';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
 
 class ComprasListView extends StatelessWidget {
   int temCart;

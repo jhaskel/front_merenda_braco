@@ -113,13 +113,13 @@ class _EstoqueListViewState extends State<EstoqueListView> {
     BuildContext context,
     Estoque dados,
   ) {
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed: () {
         pop(context);
       },
     );
-    Widget continuaButton = FlatButton(
+    Widget continuaButton = MaterialButton(
       child: Text("Excluir"),
       onPressed: () async {
         setState(() {

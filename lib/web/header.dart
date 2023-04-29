@@ -12,7 +12,7 @@ import 'package:merenda_escolar/pages/usuarios/meus_dados_page.dart';
 import 'package:merenda_escolar/utils/bloc/bloc.dart';
 import 'package:merenda_escolar/utils/bloc/bloc_af.dart';
 import 'package:provider/provider.dart';
-
+import 'package:badges/badges.dart' as badges;
 class Header extends StatefulWidget {
   @override
   _HeaderState createState() => _HeaderState();
@@ -132,7 +132,7 @@ class _HeaderState extends State<Header> {
         ? InkWell(
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Badge(
+              child: badges.Badge(
                 position: BadgePosition.topEnd(top: -6, end: 0),
                 animationDuration: Duration(milliseconds: 300),
                 animationType: BadgeAnimationType.slide,
@@ -154,7 +154,7 @@ class _HeaderState extends State<Header> {
         ? InkWell(
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
-        child: Badge(
+        child: badges.Badge(
           position: BadgePosition.topEnd(top: -6, end: 0),
           animationDuration: Duration(milliseconds: 300),
           animationType: BadgeAnimationType.slide,
@@ -176,7 +176,7 @@ class _HeaderState extends State<Header> {
         ? InkWell(
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
-        child: Badge(
+        child: badges.Badge(
           position: BadgePosition.topEnd(top: -6, end: 0),
           animationDuration: Duration(milliseconds: 300),
           animationType: BadgeAnimationType.slide,
@@ -198,7 +198,7 @@ class _HeaderState extends State<Header> {
         ? InkWell(
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
-        child: Badge(
+        child: badges.Badge(
           position: BadgePosition.topEnd(top: -6, end: 0),
           animationDuration: Duration(milliseconds: 300),
           animationType: BadgeAnimationType.slide,

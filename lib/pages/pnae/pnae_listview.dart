@@ -128,14 +128,14 @@ class _PnaeListViewState extends State<PnaeListView> {
   }
 
   showAlterar(BuildContext context, Pnae c) {
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed:  () {
         pop(context);
         pop(context);
       },
     );
-    Widget continuaButton = FlatButton(
+    Widget continuaButton = MaterialButton(
 
       child: Text("Continuar"),
 
@@ -188,14 +188,14 @@ class _PnaeListViewState extends State<PnaeListView> {
   }
 
   showExcluir(BuildContext context, Pnae c) {
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed:  () {
         pop(context);
         pop(context);
       },
     );
-    Widget continuaButton = FlatButton(
+    Widget continuaButton = MaterialButton(
 
       child: Text("Excluir"),
 

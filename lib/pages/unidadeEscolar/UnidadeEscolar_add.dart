@@ -155,7 +155,7 @@ class _UnidadeEscolarAddState extends State<UnidadeEscolarAdd> {
                     padding: const EdgeInsets.all(10),
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
-                        showSelectedItem: true,
+                        //showSelectedItem: true,
                         items: mapNivel.keys.toList(),
                         label: "Nível Escolar",
                         onChanged: (String data)  {

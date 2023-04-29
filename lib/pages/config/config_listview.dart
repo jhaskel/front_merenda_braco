@@ -104,13 +104,13 @@ class _ConfigListViewState extends State<ConfigListView> {
     BuildContext context,
     Config dados,
   ) {
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed: () {
         pop(context);
       },
     );
-    Widget continuaButton = FlatButton(
+    Widget continuaButton = MaterialButton(
       child: Text("Excluir"),
       onPressed: () async {
         setState(() {

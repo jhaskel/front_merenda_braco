@@ -15,7 +15,7 @@ alert(BuildContext context, String msg, {Function callback}) {
           title: Text("Merenda Escolar"),
           content: Text("$msg"),
           actions: <Widget>[
-            FlatButton(
+            MaterialButton(
               child: Text("OK"),
               onPressed: () {
                 Navigator.pop(context);
@@ -42,13 +42,13 @@ alertConfirm(BuildContext context, String msg, {Function confirmCallback}) {
           title: Text("Carros"),
           content: Text(msg),
           actions: <Widget>[
-            FlatButton(
+            MaterialButton(
               child: Text("Cancelar"),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            FlatButton(
+            MaterialButton(
               child: Text("Confirmar"),
               onPressed: () {
                 Navigator.pop(context);

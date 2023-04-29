@@ -23,10 +23,7 @@ import 'package:merenda_escolar/web/breadcrumb.dart';
 
 import 'package:intl/intl.dart';
 
-import 'dart:async';
-import 'package:appbar_textfield/appbar_textfield.dart';
 import 'package:provider/provider.dart';
-import 'package:search_page/search_page.dart';
 
 class OrdemPageAutorizada extends StatefulWidget {
   @override
@@ -147,71 +144,38 @@ iniciaBloc();
   _admin(List<Af> lisItens, List<Fornecedor> listFor,
     List<Nivel> listNiveis) {
 
-     return Column(
-       children: [
-         Container(
-           width: 200,
-           child:   InkWell(
-             onTap: (){
-               buildShowSearch(context,lisItens,listFor);
-             },
-             child: Container(
-               height: 40,
-               child:  TextFormField(
-                 enabled: false,
-                 decoration: new InputDecoration(
-                   prefixIcon: Icon(Icons.search),
-                   labelText: "Buscar...",
-                   fillColor: Colors.white,
-                   border: new OutlineInputBorder(
-                     borderRadius: new BorderRadius.circular(25.0),
-                     borderSide: new BorderSide(),
-                   ),
-                   //fillColor: Colors.green
-                 ),
+     return Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Scrollbar(
+          controller: _controller,
+          isAlwaysShown: true,
+          showTrackOnHover: true,
+          thickness: 10,
+          radius: Radius.circular(15),
 
-                 keyboardType: TextInputType.emailAddress,
-
-               ),
-             ),
-           ),
-         ),
-         Expanded(
-           child: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Scrollbar(
+          child: ListView.builder(
                 controller: _controller,
-                isAlwaysShown: true,
-                showTrackOnHover: true,
-                thickness: 10,
-                radius: Radius.circular(15),
+                  itemCount: lisItens.length,
+                  itemBuilder: (context, index) {
+                    Af p = lisItens[index];
+                    var filtro = listFor
+                        .where((element) => element.id == p.fornecedor)
+                        .toList();
 
-                child: ListView.builder(
-                      controller: _controller,
-                        itemCount: lisItens.length,
-                        itemBuilder: (context, index) {
-                          Af p = lisItens[index];
-                          var filtro = listFor
-                              .where((element) => element.id == p.fornecedor)
-                              .toList();
+                    var nome = filtro.map((e) => e.nome).first;
 
-                          var nome = filtro.map((e) => e.nome).first;
+                    var filtroNivel = listNiveis
+                        .where((element) => element.id == p.nivel)
+                        .toList();
 
-                          var filtroNivel = listNiveis
-                              .where((element) => element.id == p.nivel)
-                              .toList();
+                    var nomeNivel = filtroNivel.map((e) => e.nome).first;
+                    DateTime crea = DateTime.parse(p.createdAt);
 
-                          var nomeNivel = filtroNivel.map((e) => e.nome).first;
-                          DateTime crea = DateTime.parse(p.createdAt);
+                    return _cardProduto(p, crea, nomeNivel, nome);
+                  }),
 
-                          return _cardProduto(p, crea, nomeNivel, nome);
-                        }),
-
-              ),
-            ),
-         ),
-       ],
-     )
+        ),
+      )
     ;
   }
 
@@ -300,46 +264,7 @@ iniciaBloc();
     nav.push(PageInfo(c.code.toString(), AfDetalhe(c)));
   }
 
-  Future<Af> buildShowSearch(  BuildContext context, List<Af> lisItens, List<Fornecedor> listFor) {
-    return showSearch(
-      context: context,
-      delegate: SearchPage<Af>(
-        onQueryUpdate: (s) => print(s),
-        items: lisItens,
-        searchLabel: 'Buscar',
-        suggestion: Center(
-          child: Text(
-              'Digite nome do produto ou seu código'),
-        ),
-        failure: Center(
-          child: Text('Nenhum dado encontrado :('),
-        ),
-        filter: (person) => [
-          person.nomefor,
-          person.code.toString(),
 
-        ],
-        builder: (person) => ListTile(
-          title: Text(person.nomefor),
-          subtitle: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(person.code.toString()),
-              Text(person.nomefor)
-            ],
-
-          ),
-
-          onTap: () {
-            _onClickDetalhe(person);
-
-            Navigator.pop(context);
-
-          },
-        ),
-      ),
-    );
-  }
 
 
 }

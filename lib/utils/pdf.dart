@@ -18,7 +18,7 @@ class _PdfPageState extends State<PdfPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: RaisedButton(
+      child: MaterialButton(
         onPressed: _launchURL,
         child: Text('Show Flutter homepage'),
       ),

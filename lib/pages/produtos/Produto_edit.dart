@@ -201,7 +201,7 @@ class _ProdutoEditState extends State<ProdutoEdit> {
                     padding: const EdgeInsets.all(10),
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
-                        showSelectedItem: true,
+                        //showSelectedItem: true,
                         items: mapCategoria.keys.toList(),
                         label: "Categoria",
                         onChanged: (String data) {
@@ -216,7 +216,7 @@ class _ProdutoEditState extends State<ProdutoEdit> {
                     padding: const EdgeInsets.all(10),
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
-                        showSelectedItem: true,
+                        //showSelectedItem: true,
                         items: mapFornecedor.keys.toList(),
                         label: "Fornecedor",
                         onChanged: (String data) {

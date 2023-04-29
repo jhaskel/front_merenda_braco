@@ -110,13 +110,13 @@ class _ProdutoListViewState extends State<ProdutoListView> {
     BuildContext context,
     Produto dados,
   ) {
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed: () {
         pop(context);
       },
     );
-    Widget continuaButton = FlatButton(
+    Widget continuaButton = MaterialButton(
       child: Text("Excluir"),
       onPressed: () async {
         setState(() {

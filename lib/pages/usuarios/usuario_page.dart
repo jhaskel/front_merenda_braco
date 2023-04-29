@@ -207,13 +207,13 @@ class _UsuarioPageState extends State<UsuarioPage> {
   }
 
   showAlterarSenha(BuildContext context, Usuario usuario) {
-    Widget cancelaButton = FlatButton(
+    Widget cancelaButton = MaterialButton(
       child: Text("Cancelar"),
       onPressed:  () {
         pop(context);
       },
     );
-    Widget continuaButton = FlatButton(
+    Widget continuaButton = MaterialButton(
       child: Text("Ok"),
       onPressed:  () {
         _onClickSenha(tSenha.text);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
-import 'package:appbar_textfield/appbar_textfield.dart';
+
 import 'package:merenda_escolar/core/bloc/estoque_bloc.dart';
 import 'package:merenda_escolar/pages/estoque/Estoque.dart';
 import 'package:merenda_escolar/pages/estoque/estoque_detalhe.dart';
@@ -97,19 +97,7 @@ class _EstoqueMaisState extends State<EstoqueMais> {
                             fontWeight: FontWeight.bold, fontSize: 18),
                       )),
                 ),
-                AppBarTextField(
-                  backgroundColor: Colors.transparent,
-                  title: Text("Buscar...."),
-                  onBackPressed: _onRestoreAllData,
-                  onClearPressed: _onRestoreAllData,
-                  onChanged: _onSimpleSearch2Changed,
-                  autofocus: true,
-                  elevation: 1,
-                  clearBtnIcon: Icon(
-                    Icons.clear,
-                    color: Colors.black87,
-                  ),
-                ),
+
                 SizedBox(
                   height: 5,
                 ),

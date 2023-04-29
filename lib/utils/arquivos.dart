@@ -68,7 +68,7 @@ class _EnviarArquivoState extends State<EnviarArquivo> {
                             child: Column(
                               children: [
                                 Text(msg),
-                                FlatButton(onPressed: (){
+                                MaterialButton(onPressed: (){
 
                                 }, child: Text('Retornar'))
                               ],

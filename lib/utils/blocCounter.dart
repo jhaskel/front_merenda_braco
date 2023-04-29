@@ -22,7 +22,7 @@ class BlocCounter extends StatelessWidget {
           ),
         ),
         SizedBox(height: 50,),
-        RaisedButton(
+        MaterialButton(
             onPressed: (){
               blocx.increment();
             },

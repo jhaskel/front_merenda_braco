@@ -19,7 +19,6 @@ import 'package:merenda_escolar/web/breadcrumb.dart';
 import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
-import 'package:search_page/search_page.dart';
 
 class OrdemPage extends StatefulWidget {
   @override
@@ -116,41 +115,8 @@ class _OrdemPageState extends State<OrdemPage> {
     }
 
 
-    return Column(
-      children: [
-        Container(
-          width: 200,
-          child:   InkWell(
-            onTap: (){
-              buildShowSearch(context,listAfs,listFor);
-            },
-            child: Container(
-              height: 40,
-              child:  TextFormField(
-                enabled: false,
-                decoration: new InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  labelText: "Buscar...",
-                  fillColor: Colors.white,
-                  border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(25.0),
-                    borderSide: new BorderSide(),
-                  ),
-                  //fillColor: Colors.green
-                ),
-
-                keyboardType: TextInputType.emailAddress,
-
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Container(
-              child: _admin(listAfs, listFor, listNiveis)),
-        ),
-      ],
-    );
+    return Container(
+        child: _admin(listAfs, listFor, listNiveis));
 
   }
 
@@ -278,45 +244,6 @@ class _OrdemPageState extends State<OrdemPage> {
   }
 
 
-  Future<Af> buildShowSearch(  BuildContext context, List<Af> lisItens, List<Fornecedor> listFor) {
-    return showSearch(
-      context: context,
-      delegate: SearchPage<Af>(
-        onQueryUpdate: (s) => print(s),
-        items: lisItens,
-        searchLabel: 'Buscar',
-        suggestion: Center(
-          child: Text(
-              'Digite nome do produto ou seu código'),
-        ),
-        failure: Center(
-          child: Text('Nenhum dado encontrado :('),
-        ),
-        filter: (person) => [
-          person.nomefor,
-          person.code.toString(),
 
-        ],
-        builder: (person) => ListTile(
-          title: Text(person.nomefor),
-          subtitle: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(person.code.toString()),
-              Text(person.nomefor)
-            ],
-
-          ),
-
-          onTap: () {
-            _onClickDetalhe(person);
-
-            Navigator.pop(context);
-
-          },
-        ),
-      ),
-    );
-  }
 
 }

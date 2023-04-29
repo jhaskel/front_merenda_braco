@@ -16,7 +16,7 @@ class _EmailPageState extends State<EmailPage> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        child: RaisedButton(
+        child: MaterialButton(
             onPressed: () async {
               var emaail = emailx ?? Email();
               emaail.nome = "joao Haskel";

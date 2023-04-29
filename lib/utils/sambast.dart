@@ -105,7 +105,7 @@ class _TesteBlocState extends State<TesteBloc> {
               return Column(
                 children: [
                   Container(
-                    child: RaisedButton(
+                    child: MaterialButton(
                       onPressed: (){
                         grava(animals);
                       },
@@ -114,7 +114,7 @@ class _TesteBlocState extends State<TesteBloc> {
                   ),
                   SizedBox(height: 20,),
                   Container(
-                    child: RaisedButton(
+                    child: MaterialButton(
                       onPressed: (){
                         read();
                         setState(() {});

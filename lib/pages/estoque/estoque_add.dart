@@ -102,7 +102,8 @@ class _EstoqueAddState extends State<EstoqueAdd> {
         nomeProduto2 = uni.first.nome;
       });
 
-
+      print("kkl9 $unidade");
+      print("kkl9 $nomeProduto2");
 
   }
 
@@ -129,15 +130,11 @@ class _EstoqueAddState extends State<EstoqueAdd> {
     }
 
   }
-  var codeProduto;
-  var nomProduto;
+
 
   @override
   void initState() {
     if (estoque != null) {
-      codeProduto = estoque.produto;
-      nomProduto = estoque.nomeproduto;
-
        tCode.text = estoque.code.toString();
        tCategoria.text = estoque.categoria.toString();
        tFornecedor.text = estoque.fornecedor.toString();
@@ -203,9 +200,8 @@ class _EstoqueAddState extends State<EstoqueAdd> {
     if(estoque !=null){
       estoqueAd = EstoqueAd(
         id: estoque.id,
-        produto: codeProduto,
+        produto: estoque.produto,
         setor: estoque.setor,
-        nomeproduto: nomProduto,
         code: estoque.code,
         alias: estoque.alias,
         quantidade: estoque.quantidade,
@@ -319,7 +315,7 @@ class _EstoqueAddState extends State<EstoqueAdd> {
                     child: DropdownSearch<String>(
                         showSearchBox: true,
                         mode: Mode.BOTTOM_SHEET,
-                        showSelectedItem: true,
+                      //  showSelectedItem: true,
                         items: mapProduto.keys.toList(),
                         label: "Produto",
                         onChanged: (String data) {
@@ -339,7 +335,7 @@ class _EstoqueAddState extends State<EstoqueAdd> {
                     padding: const EdgeInsets.all(10),
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
-                        showSelectedItem: true,
+                        //showSelectedItem: true,
                         items: mapCategoria.keys.toList(),
                         label: "Categoria",
                         onChanged: (String data) {
@@ -357,7 +353,7 @@ class _EstoqueAddState extends State<EstoqueAdd> {
                     padding: const EdgeInsets.all(10),
                     child: DropdownSearch<String>(
                         mode: Mode.MENU,
-                        showSelectedItem: true,
+                    //    showSelectedItem: true,
                         items: mapFornecedor.keys.toList(),
                         label: "Fornecedor",
                         onChanged: (String data) {
@@ -457,7 +453,7 @@ class _EstoqueAddState extends State<EstoqueAdd> {
 
 
   _onClickSalvar() async {
-print("Haskel01");
+
     if (!_formKey.currentState.validate()) {
       return;
     } else {
@@ -489,19 +485,18 @@ print("Haskel01");
         valor = double.parse(valor1);
         print("004 $valor");
       } else {
-
-        valor = double.parse(valor1);
         print("1111 $valor");
+        valor = double.parse(valor1);
       }
       // Cria o usuario
     var produ = estoqueAd ?? EstoqueAd();
-        produ.produto= codeProduto;
+        produ.produto= idProduto;
         produ.setor =1;
         produ.code = int.parse(tCode.text);
-        produ.alias = estoque==null?nomeProduto:estoqueAd.alias;
-        produ.nomeproduto = nomProduto;
+        produ.alias = estoqueAd.alias;
+        produ.nomeproduto = nomeProduto2;
         produ.quantidade = quantidade;
-        produ.unidade = estoque ==null ?unidade:estoqueAd.unidade;
+        produ.unidade = estoqueAd.unidade;
         produ.categoria = idCategoria;
         produ.licitacao = licitacao.id;
         produ.processo = licitacao.processo;
@@ -513,7 +508,7 @@ print("Haskel01");
         produ.createdAt = hoje;
         produ.modifiedAt = hoje;
 
-        print("produdto enviado $produ");
+        print(' produto ${produ}');
 
       ApiResponse<bool> response = await EstoqueAddApi.save(context, produ);
 
@@ -524,9 +519,9 @@ print("Haskel01");
         bloc.fetchLicitacao(context, widget.licitacao.id);
         print("SUCESSO");
 
-        alert(context, "Estoque salvo com sucesso", callback: () {_onClickRetorna();
+      /*  alert(context, "Estoque salvo com sucesso", callback: () {_onClickRetorna();
 
-        });
+        });*/
       } else {
         alert(context, response.msg);
       }
